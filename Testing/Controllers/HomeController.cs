@@ -7,15 +7,17 @@ namespace Testing.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationContext app;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ApplicationContext app)
         {
             _logger = logger;
+            this.app = app;
         }
 
         public IActionResult Index()
         {
-            return View();
+             return View(app.Categories.ToList());
         }
 
         public IActionResult Privacy()
