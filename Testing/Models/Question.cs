@@ -18,7 +18,7 @@ public partial class Question
     public int? TestId { get; set; }
 
     [InverseProperty("Question")]
-    public virtual ICollection<Answer> Answers { get; } = new List<Answer>();
+    public virtual ICollection<Answer>? Answers { get; } = new List<Answer>();
 
     [ForeignKey("TestId")]
     [InverseProperty("Questions")]

@@ -28,8 +28,8 @@ public partial class Test
     public virtual Category? Category { get; set; }
 
     [InverseProperty("Test")]
-    public virtual ICollection<Question> Questions { get; } = new List<Question>();
+    public virtual ICollection<Question>? Questions { get; } = new List<Question>();
 
     [InverseProperty("Test")]
-    public virtual ICollection<Result> Results { get; } = new List<Result>();
+    public virtual ICollection<Result>? Results { get; } = new List<Result>();
 }

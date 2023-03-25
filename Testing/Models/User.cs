@@ -24,7 +24,7 @@ public partial class User
     public int? RoleId { get; set; }
 
     [InverseProperty("User")]
-    public virtual ICollection<Result> Results { get; } = new List<Result>();
+    public virtual ICollection<Result>? Results { get; } = new List<Result>();
 
     [ForeignKey("RoleId")]
     [InverseProperty("Users")]

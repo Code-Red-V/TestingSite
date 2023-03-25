@@ -1,12 +1,70 @@
-﻿@model List<Category>
+﻿@model List<Question>
 @{
     ViewData["Title"] = "Home Page";
+    int iteration = 1;
+    char Qchar = 'Q';
 }
-@foreach(var item in Model)
-{
-    <p>@item.Name</p>
-}
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+
+<form asp-controller="Home" asp-action="CheckAnswers" method="post">
+   
+    @foreach(var question in Model)
+    {       
+        <div>
+            <span><b>Вопрос № @iteration</b></span><br>
+            <span id="question">@question.Text</span><br>
+            @foreach(var answer in question.Answers)
+            {
+                if(question.Answers.Where(a=>a.IsTrue==true).Count()>1)
+                {
+                    <span id="answer">
+                        @if (answer.IsTrue == true)
+                        {
+                            <input name="@Qchar@iteration" type="checkbox" value="@question.QuestionId @answer.AnswerId true">
+                        }
+                        else
+                        {
+                            <input name="@Qchar@iteration" type="checkbox" value="@question.QuestionId @answer.AnswerId false">
+                        }
+                        <span class="ansText">@answer.Text</span>
+
+                    </span>
+
+                    <br />
+                }
+                else
+                {
+                    <span id="answer">
+
+                        @if (answer.IsTrue == true)
+                        {
+                            <input name="@Qchar@iteration" type="radio" value="@question.QuestionId @answer.AnswerId true">
+                        }
+                        else
+                        {
+                            <input name="@Qchar@iteration" type="radio" value="@question.QuestionId @answer.AnswerId false">
+                        }
+                        <span class="ansText">@answer.Text</span>
+
+                    </span>                    
+
+                    <br />
+                }
+            }
+            <br>
+        </div>
+        iteration++;
+    }
+    <input class="btn btn-danger" type="button" value="Проверить" onclick="check()"/>
+</form>
+
+<script>
+    function check(){
+        var names=[];
+        for(let i=0;i<@iteration;i++){
+            names=document.getElementsByName('Q'+(i+1));
+        }
+        alert(names);
+        //document.querySelector('input[name="Q3"]:checked').value
+    }
+</script>

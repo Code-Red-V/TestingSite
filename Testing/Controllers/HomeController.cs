@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using Testing.Models;
+using Testing.ViewModels;
 
 namespace Testing.Controllers
 {
@@ -17,9 +19,14 @@ namespace Testing.Controllers
 
         public IActionResult Index()
         {
-             return View(app.Categories.ToList());
+            var questions = app.Questions.Include(a=>a.Answers).ToList();
+             return View(questions);
         }
-
+        [HttpPost]
+        public IActionResult CheckAnswers(List<int> question,List<string> Q3)
+        {
+            return Ok();
+        }
         public IActionResult Privacy()
         {
             return View();
