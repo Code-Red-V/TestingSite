@@ -18,7 +18,7 @@ namespace Testing.Controllers
 
         public IActionResult Index()
         {
-            return View("/Views/Backend/Index.cshtml");
+            return View(); /*"/Views/Backend/Index.cshtml"*/
         }
     }
 }

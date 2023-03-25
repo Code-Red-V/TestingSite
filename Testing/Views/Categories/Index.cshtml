@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Testing.Models.Category>
+
+@{
+    ViewBag.Title = "Админка";
+    Layout = "/Views/Shared/_BackendLayout.cshtml";
+}
+
+<h1>Категории</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-outline-success">Создать категорию</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-route-id="@item.CategoryId" class="btn btn-outline-secondary">Изменить</a>
+@*                    <a asp-action="Details" asp-route-id="@item.CategoryId" class="btn btn-outline-secondary" >Детали</a>*@
+                    <a asp-action="Delete" asp-route-id="@item.CategoryId" class="btn btn-outline-danger"><img src="img/delete_img.png" width="24" height="24"></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
