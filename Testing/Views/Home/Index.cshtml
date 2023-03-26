@@ -20,11 +20,11 @@
                     <span id="answer">
                         @if (answer.IsTrue == true)
                         {
-                            <input name="@Qchar@iteration" type="checkbox" value="@question.QuestionId @answer.AnswerId true">
+                            <input name="@Qchar@iteration" type="checkbox" value="true">
                         }
                         else
                         {
-                            <input name="@Qchar@iteration" type="checkbox" value="@question.QuestionId @answer.AnswerId false">
+                            <input name="@Qchar@iteration" type="checkbox" value="false">
                         }
                         <span class="ansText">@answer.Text</span>
 
@@ -38,11 +38,11 @@
 
                         @if (answer.IsTrue == true)
                         {
-                            <input name="@Qchar@iteration" type="radio" value="@question.QuestionId @answer.AnswerId true">
+                            <input name="@Qchar@iteration" type="radio" value="true">
                         }
                         else
                         {
-                            <input name="@Qchar@iteration" type="radio" value="@question.QuestionId @answer.AnswerId false">
+                            <input name="@Qchar@iteration" type="radio" value="false">
                         }
                         <span class="ansText">@answer.Text</span>
 
@@ -57,14 +57,37 @@
     }
     <input class="btn btn-success" type="button" value="Проверить" onclick="check()"/>
 </form>
-
+<div id="result"></div>
 <script>
     function check(){
-        var names=[];
-        for(let i=0;i<@iteration;i++){
-            names=document.getElementsByName('Q'+(i+1));
+        var names = [], checkboxesChecked = [], rightAnswers = 0, rightAnswersPercent = 0, questionCount = @iteration-1;
+        
+        for(let i=0;i<questionCount;i++){
+            var name='Q'+(i+1);
+            names[i] = document.querySelector("input[name=" + name + "]:checked").value;
+
+            if(names[i]=='true') {
+                rightAnswers++;
+            }
         }
-        alert(names);
+        rightAnswersPercent=Math.trunc(rightAnswers/questionCount*100)+'%';
+
+        var result = document.getElementById('result');
+           result.innerHTML="";
+           result.innerHTML="<p></p>Ваш результат<br><p>Тест пройден на "+rightAnswersPercent+"</p>";
+
+
+        //alert(names);
+        //alert(rightAnswers);
+
         //document.querySelector('input[name="Q3"]:checked').value
+
+        //if(names[i].type=='checkbox'){
+        //    for(let j=0;j<names[i].length;j++){
+        //        if (names[i][j].checked) {
+        //            checkboxesChecked.push(names[i][j]);
+        //        }
+        //    }
+        //}
     }
 </script>
