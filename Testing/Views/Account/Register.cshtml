@@ -6,31 +6,31 @@
     <div class="validation" asp-validation-summary="ModelOnly"></div>
     <div>
         <div>
-            <label asp-for="UserName">Введите Имя</label><br />
-            <input type="text" asp-for="UserName" />
+            <label asp-for="UserName" class="control-label">Введите Имя</label><br />
+            <input type="text" asp-for="UserName" class="form-control w-50" />
             <span asp-validation-for="UserName" />
         </div>
         <div>
-            <label asp-for="Email">Введите Email</label><br />
-            <input type="text" asp-for="Email" />
+            <label asp-for="Email" class="control-label">Введите Email</label><br />
+            <input type="text" asp-for="Email" class="form-control w-50" />
             <span asp-validation-for="Email" />
         </div>
         <div>
-            <label asp-for="Password">Введите пароль</label><br />
-            <input asp-for="Password" />
+            <label asp-for="Password" class="control-label">Введите пароль</label><br />
+            <input asp-for="Password" class="form-control w-50" />
             <span asp-validation-for="Password" />
         </div>
-        <div>
-            <label asp-for="ConfirmPassword">Повторите пароль</label><br />
-            <input asp-for="ConfirmPassword" />
+        <div class ="mb-3 mt-3">
+            <label asp-for="ConfirmPassword" class="control-label">Повторите пароль</label><br />
+            <input asp-for="ConfirmPassword" class="form-control w-50" />
             <span asp-validation-for="ConfirmPassword" />
         </div>
-        <div>
+        <div >
             <input type="hidden" asp-for="RoleId" value="2"/>
             <span asp-validation-for="RoleId" />
         </div>
         <div>
-            <input type="submit" value="Регистрация" />
+            <input type="submit" value="Регистрация" class="btn btn-outline-primary"/>
         </div>
     </div>
 </form>

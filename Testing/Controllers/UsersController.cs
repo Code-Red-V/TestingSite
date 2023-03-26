@@ -26,54 +26,12 @@ namespace Testing.Controllers
             return View(await applicationContext.ToListAsync());
         }
 
-        public async Task<IActionResult> GetAll()
-        {
-            var applicationContext = _context.Users.Include(u => u.Role);
-            return View(await applicationContext.ToListAsync());
-        }
-
-        //// GET: Users/Details/5
-        //public async Task<IActionResult> Details(int? id)
+        //public async Task<IActionResult> GetAll()
         //{
-        //    if (id == null || _context.Users == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var user = await _context.Users
-        //        .Include(u => u.Role)
-        //        .FirstOrDefaultAsync(m => m.UserId == id);
-        //    if (user == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(user);
+        //    var applicationContext = _context.Users.Include(u => u.Role);
+        //    return View(await applicationContext.ToListAsync());
         //}
 
-        //// GET: Users/Create
-        //public IActionResult Create()
-        //{
-        //    ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleId");
-        //    return View();
-        //}
-
-        //// POST: Users/Create
-        //// To protect from overposting attacks, enable the specific properties you want to bind to.
-        //// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("UserId,UserName,Email,Password,RoleId")] User user)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(user);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleId", user.RoleId);
-        //    return View(user);
-        //}
 
         // GET: Users/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -88,7 +46,7 @@ namespace Testing.Controllers
             {
                 return NotFound();
             }
-            ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "RoleId", user.RoleId);
+            ViewData["RoleId"] = new SelectList(_context.Roles, "RoleId", "Name");
             return View(user);
         }
 

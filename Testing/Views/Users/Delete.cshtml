@@ -5,9 +5,9 @@
     Layout = "/Views/Shared/_BackendLayout.cshtml";
 }
 
-<h1>Delete</h1>
+<h1>Удаления пользователя</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Вы точно хотите удалить пользователя?</h3>
 <div>
     <h4>User</h4>
     <hr />
@@ -39,8 +39,8 @@
     </dl>
     
     <form asp-action="Delete">
+        <a asp-action="Index" class="btn btn-outline-secondary">Назад к списку</a>
         <input type="hidden" asp-for="UserId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Delete" class="btn btn-danger" />
     </form>
 </div>
