@@ -28,8 +28,17 @@
                 </ul>
 
                 <div class="text-end">
-                    <a class="btn btn-outline-light me-2" asp-area="" asp-controller="Account" asp-action="Login">Вход</a>
-                    <a class="btn btn-warning" asp-area="" asp-controller="Account" asp-action="Register">Регистрация</a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <b>@User.Identity.Name</b>
+                        <a class="btn btn-outline-light me-2" asp-area="" asp-controller="Account" asp-action="Logout">Выйти</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-outline-light me-2" asp-area="" asp-controller="Account" asp-action="Login">Вход</a>
+                        <a class="btn btn-warning" asp-area="" asp-controller="Account" asp-action="Register">Регистрация</a>
+                    }
+                  
 @*                    <button type="button" class="btn btn-outline-light me-2">Вход</button>
                     <button type="button" class="btn btn-warning">Регистрация</button>*@
                 </div>  
