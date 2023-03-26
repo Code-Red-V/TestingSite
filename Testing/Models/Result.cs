@@ -15,8 +15,8 @@ public partial class Result
     public int? UserId { get; set; }
 
     public int? TestId { get; set; }
-
-    public int? ResultText { get; set; }
+    [StringLength(30)]
+    public string? ResultText { get; set; }
 
     public int? RightAnswersPercent { get; set; }
 
@@ -30,4 +30,5 @@ public partial class Result
     [ForeignKey("UserId")]
     [InverseProperty("Results")]
     public virtual User? User { get; set; }
+
 }

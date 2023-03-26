@@ -6,8 +6,9 @@
 }
 
 
-<form asp-controller="Home" asp-action="CheckAnswers" method="post">
+<form id="test" method="post">
    
+    <input type="hidden" name="test" value="@ViewBag.TestId"/>
     @foreach(var question in Model)
     {       
         <div>
@@ -20,11 +21,11 @@
                     <span id="answer">
                         @if (answer.IsTrue == true)
                         {
-                            <input name="@Qchar@iteration" type="checkbox" value="true">
+                            <input class="answer" name="@Qchar@iteration" type="checkbox" value="true">
                         }
                         else
                         {
-                            <input name="@Qchar@iteration" type="checkbox" value="false">
+                            <input class="answer" name="@Qchar@iteration" type="checkbox" value="false">
                         }
                         <span class="ansText">@answer.Text</span>
 
@@ -38,11 +39,11 @@
 
                         @if (answer.IsTrue == true)
                         {
-                            <input name="@Qchar@iteration" type="radio" value="true">
+                            <input class="answer" name="@Qchar@iteration" type="radio" value="true">
                         }
                         else
                         {
-                            <input name="@Qchar@iteration" type="radio" value="false">
+                            <input class="answer" name="@Qchar@iteration" type="radio" value="false">
                         }
                         <span class="ansText">@answer.Text</span>
 
@@ -55,28 +56,80 @@
         </div>
         iteration++;
     }
-    <input class="btn btn-success" type="button" value="Проверить" onclick="check()"/>
+    <input id="submitButton" class="btn btn-success" type="button" value="Проверить" onclick="check()"/>
 </form>
+<br />
+<hr />
+<button id="saveResult" class="btn btn-warning resultButton" onclick="saveResult()">Сохранить результат</button>
 <div id="result"></div>
 <script>
-    function check(){
-        var names = [], checkboxesChecked = [], rightAnswers = 0, rightAnswersPercent = 0, questionCount = @iteration-1;
-        
-        for(let i=0;i<questionCount;i++){
-            var name='Q'+(i+1);
-            names[i] = document.querySelector("input[name=" + name + "]:checked").value;
+    function saveResult(){
+        var result=document.getElementById('percent').innerHTML;
+        var test = document.querySelector("input[name='test']").value;
 
-            if(names[i]=='true') {
+        $.post('/Home/SaveResult', { percent:""+result+"", testId:""+test+"" },
+            function (res) {
+              if(res.isValid){
+                  alert(res.message);
+              }else{
+                  alert(res.message);
+              }
+            });
+    }
+    function check(){
+        var radioChecked = [], checkboxesChecked = [], rightAnswers = 0, rightAnswersPercent = 0, questionCount = @iteration-1, rightCheckBoxesChecked=0;
+        
+        var allInputs=document.getElementsByClassName('answer');
+
+        for(let i=0;i<allInputs.length;i++){
+            if(allInputs[i].checked && allInputs[i].type=='radio'){
+                radioChecked.push(allInputs[i]);
+            }else if(allInputs[i].checked && allInputs[i].type=='checkbox'){
+                checkboxesChecked.push(allInputs[i]);
+            }      
+        }
+        for(let i=0;i<radioChecked.length;i++){
+            if(radioChecked[i].value=='true'){
                 rightAnswers++;
             }
         }
+        //for (let i = 0; i < checkboxesChecked.length; i++) {
+        //    if (checkboxesChecked[i].value == 'true') {
+        //        rightCheckBoxesChecked++;
+        //    } else { rightCheckBoxesChecked--; }
+        //}
+
+        for(let i=0;i<questionCount;i++){
+            var name = 'Q' + (i + 1);
+            var inputs=document.querySelector("input[name=" + name + "]");
+            for(let j=0;j<inputs.length;j++){
+                if(inputs[j].type=='checkbox'){
+                    if(input[j].value=='true'){
+                        rightCheckBoxesChecked++;
+                    }else{
+                        rightCheckBoxesChecked--;
+                    }
+                }
+            }                       
+        }
+        console.log(rightCheckBoxesChecked);
         rightAnswersPercent=Math.trunc(rightAnswers/questionCount*100)+'%';
 
         var result = document.getElementById('result');
-           result.innerHTML="";
-           result.innerHTML="<p></p>Ваш результат<br><p>Тест пройден на "+rightAnswersPercent+"</p>";
+        result.innerHTML="";
+        result.innerHTML = "<p></p>Ваш результат<br> Тест пройден на ";
 
+        var descB=document.createElement('b');
+        descB.setAttribute("id","percent");
+        descB.innerHTML = ""+rightAnswersPercent+"";
+        
+        result.appendChild(descB);
 
+        var submitButton = document.getElementById('submitButton');
+        submitButton.classList.add('disabled');
+
+       // var resultButton = document.getElementById('saveResult');
+       //resultButton.classList.remove('resultButton');
         //alert(names);
         //alert(rightAnswers);
 

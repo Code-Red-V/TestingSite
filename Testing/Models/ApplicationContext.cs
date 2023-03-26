@@ -59,7 +59,6 @@ public partial class ApplicationContext : DbContext
 
         modelBuilder.Entity<Result>(entity =>
         {
-            entity.Property(e => e.ResultId).ValueGeneratedNever();
 
             entity.HasOne(d => d.Test).WithMany(p => p.Results)
                 .OnDelete(DeleteBehavior.Cascade)

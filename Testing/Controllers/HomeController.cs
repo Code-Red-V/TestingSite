@@ -19,23 +19,68 @@ namespace Testing.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.TestId = 1;
+
             var questions = app.Questions.Include(a=>a.Answers).ToList();
              return View(questions);
         }
         [HttpPost]
-        public IActionResult CheckAnswers(List<int> question,List<string> Q3)
+        public IActionResult SaveResult(string percent,int testId)
         {
-            return Ok();
-        }
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+            if (User.Identity.IsAuthenticated)
+            {
+                User user = app.Users.FirstOrDefault(e => e.Email == User.Identity.Name);
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                string newPercent = "";
+                for (int i = 0; i < percent.Length; i++)
+                {
+                    if (percent[i] != '%')
+                    {
+                        newPercent += percent[i];
+                    }
+                }
+                int intPercent = Convert.ToInt32(newPercent);
+                var resultText = "Тест пройден";
+
+                if (intPercent < 100)
+                {
+                    resultText = "";
+                    resultText = "Тест не пройден";
+                }
+
+                Result result = new();
+                result.TestId = testId;
+                result.ResultText = resultText;
+                result.UserId = user.UserId;
+                result.CreationDate = DateTime.Now;
+                result.RightAnswersPercent = intPercent;
+
+                app.Results.Add(result);
+                app.SaveChanges();
+
+                return Json(new { isValid = true, message="Данные добавлены в дневник" });
+            }
+            else
+            {
+                return Json(new { isValid = false, message="Необходимо авторизоваться" });
+            }
+
         }
+        //[HttpPost]
+        //public IActionResult CheckAnswers(List<int> question,List<string> Q3)
+        //{
+        //    return Ok();
+        //}
+        //public IActionResult Privacy()
+        //{
+        //    return View();
+        //}
+
+        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        //public IActionResult Error()
+        //{
+        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        //}
+
     }
 }
