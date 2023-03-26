@@ -15,10 +15,11 @@ namespace Testing.Controllers
             _logger = logger;
             this.app = app;
         }
-
         public IActionResult Index()
         {
             return View(); /*"/Views/Backend/Index.cshtml"*/
         }
+
+        
     }
 }
