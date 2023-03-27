@@ -33,7 +33,6 @@ public partial class ApplicationContext : DbContext
     {
         modelBuilder.Entity<Answer>(entity =>
         {
-            entity.Property(e => e.AnswerId).ValueGeneratedNever();
             entity.Property(e => e.Text).IsFixedLength();
 
             entity.HasOne(d => d.Question).WithMany(p => p.Answers)
@@ -76,8 +75,6 @@ public partial class ApplicationContext : DbContext
 
         modelBuilder.Entity<Test>(entity =>
         {
-            entity.Property(e => e.TestId).ValueGeneratedNever();
-
             entity.HasOne(d => d.Category).WithMany(p => p.Tests)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Test_Theme");

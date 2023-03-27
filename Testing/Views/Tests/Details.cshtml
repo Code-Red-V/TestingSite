@@ -1,7 +1,7 @@
 ﻿@model Testing.Models.Test
-
 @{
-    ViewData["Title"] = "Details";
+    ViewBag.Title = "Админка";
+    Layout = "/Views/Shared/_BackendLayout.cshtml";
 }
 
 <h1>Details</h1>
@@ -32,7 +32,7 @@
             @Html.DisplayNameFor(model => model.Category)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Category.CategoryId)
+            @Html.DisplayFor(model => model.Category.Name)
         </dd>
     </dl>
 </div>

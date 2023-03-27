@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<Testing.Models.Test>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewBag.Title = "Админка";
+    Layout = "/Views/Shared/_BackendLayout.cshtml";
 }
-
 <h1>Index</h1>
 
 <p>
@@ -40,7 +40,7 @@
                 @Html.DisplayFor(modelItem => item.CreationDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Category.CategoryId)
+                @Html.DisplayFor(modelItem => item.Category.Name)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.TestId">Edit</a> |
