@@ -80,3 +80,12 @@ function chooseCategory(el) {
 function allTests() {
     $('#testList').load("/Home/ShowTests");
 }
+
+function getChecked(question, answer) {
+    var inputs = document.getElementsByName('Q' + question);
+    if (inputs[answer].checked) {
+        inputs[answer].checked = false;
+    } else {
+        inputs[answer].checked = true;
+    }
+}

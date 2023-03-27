@@ -9,8 +9,8 @@
         <li class="item" onclick="allTests()">Все тесты</li>
     @foreach(var cat in ViewBag.Categories as List<Category>)
     {
-            <li class="item" onclick="chooseCategory(this)" id="@cat.CategoryId">@cat.Name</li>
-        }
+        <li class="item" onclick="chooseCategory(this)" id="@cat.CategoryId">@cat.Name</li>
+    }
     </ul>
 </div>
 <div id="testList">
