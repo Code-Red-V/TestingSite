@@ -47,7 +47,10 @@ function check() {
         rightCheckBoxesChecked = 0;
         trueCheckBoxes = 0;
     }
-    rightAnswers += checkBoxCheckedResult;
+    if (!isNaN(checkBoxCheckedResult)) {
+        rightAnswers += checkBoxCheckedResult;
+    }
+
     rightAnswersPercent=Math.trunc(rightAnswers/questionCount*100)+'%';
 
     var result = document.getElementById('result');
