@@ -19,9 +19,7 @@ namespace Testing.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.TestId = 1;
-            ViewBag.Categories = app.Categories.ToList();
-          
+            ViewBag.Categories = app.Categories.ToList();          
              return View();
         }
         public IActionResult Questions(int id)
@@ -86,21 +84,6 @@ namespace Testing.Controllers
             }
 
         }
-        //[HttpPost]
-        //public IActionResult CheckAnswers(List<int> question,List<string> Q3)
-        //{
-        //    return Ok();
-        //}
-        //public IActionResult Privacy()
-        //{
-        //    return View();
-        //}
-
-        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        //public IActionResult Error()
-        //{
-        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        //}
-
+        
     }
 }
