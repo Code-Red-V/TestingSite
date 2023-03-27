@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Тест";
     int iteration = 1;
+    int jIteration = 0;
     char Qchar = 'Q';
 }
 <link rel="stylesheet" href="~/css/question.css" />
@@ -32,7 +33,7 @@
 
                             <input class="answer" name="@Qchar@iteration" type="checkbox" value="@answer.IsTrue.ToString().ToLower()">
 
-                            <span class="ansText">@answer.Text</span>
+                            <span onclick="getChecked(@iteration,@jIteration)" class="ansText">@answer.Text</span>
 
                         </span>
 
@@ -40,7 +41,7 @@
                     }
                     else
                     {
-                        <span id="answer">
+                        <span id="answer" onclick="getChecked(@iteration,@jIteration)">
 
 
                             <input class="answer" name="@Qchar@iteration" type="radio" value="@answer.IsTrue.ToString().ToLower()">
@@ -50,10 +51,12 @@
 
                         <br />
                     }
+                    jIteration++;
                 }
                 <br>
             </div>
             iteration++;
+            jIteration = 0;
         }
         <input type="hidden" name="questionCount" value="@iteration" />
         <div id="centerBox">

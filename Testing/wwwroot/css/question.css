@@ -23,6 +23,14 @@
     align-items: center;
     justify-content: center;
 }
+#answer{
+    border-radius:5px;
+}
 #answer:hover{
-    background-color:
+    color:grey;
+    box-shadow:black;
+    cursor:pointer;
+}
+input:hover {
+    cursor: pointer;
 }
