@@ -1,0 +1,54 @@
+﻿@media screen and (max-width:1000px) {
+    #menu{
+        display: none;
+    }
+}
+#menu{
+    width:15%;
+    float:left;   
+    margin-right:6%;
+    text-align:center;
+}
+#testItem {
+    background-color: white;
+    border-radius: 10px;
+    padding:30px;
+    margin-bottom:20px;
+}
+#testName{
+
+}
+#testDesc{
+    font-size:smaller;
+}
+#testList {
+    width: 79%;
+    float: right;
+}
+#testAbout {
+    font-style: italic;
+    font-size: smaller;
+}
+li {
+    list-style-type: none;
+    padding: 10px;
+}
+ul{
+    padding-left:0px;
+    height:100%;
+    width:100%;
+}
+.item {
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom:5px;
+}
+.item:hover{
+    background-color:beige;
+    cursor:pointer
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}

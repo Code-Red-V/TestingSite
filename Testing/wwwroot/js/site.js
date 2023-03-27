@@ -51,8 +51,8 @@ function check() {
     rightAnswersPercent=Math.trunc(rightAnswers/questionCount*100)+'%';
 
     var result = document.getElementById('result');
-    result.innerHTML="";
-    result.innerHTML = "<p></p>Ваш результат<br> Тест пройден на ";
+    result.innerHTML = "";
+    result.innerHTML = "<p></p>Ваш результат:<br> Баллы: <b>" + rightAnswers + "</b> из <b>" + questionCount + "</b><br> Тест пройден на ";
 
     var descB=document.createElement('b');
     descB.setAttribute("id","percent");
@@ -65,4 +65,15 @@ function check() {
 
      var resultButton = document.getElementById('saveResult');
     resultButton.classList.remove('resultButton');
+}
+window.onload = function () {
+    $('#testList').load("/Home/ShowTests");
+}
+
+function chooseCategory(el) {
+          $('#testList').load("/Home/ShowTests/?id="+el.id);      
+}
+
+function allTests() {
+    $('#testList').load("/Home/ShowTests");
 }

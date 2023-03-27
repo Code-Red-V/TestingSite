@@ -1,67 +1,23 @@
 ﻿@model List<Question>
 @{
     ViewData["Title"] = "Home Page";
-    int iteration = 1;
-    char Qchar = 'Q';
 }
+<link rel="stylesheet" href="~/css/main.css" />
 
+<div id="menu">
+    <ul>
+        <li class="item" onclick="allTests()">Все тесты</li>
+    @foreach(var cat in ViewBag.Categories as List<Category>)
+    {
 
-<form id="test" method="post">
-   
-    <input type="hidden" name="test" value="@ViewBag.TestId"/>  
-    @foreach(var question in Model)
-    {       
-        <div>
-            <span><b>Вопрос № @iteration</b></span><br>
-            <span id="question">@question.Text</span><br>
-            @foreach(var answer in question.Answers)
-            {
-                if(question.Answers.Where(a=>a.IsTrue==true).Count()>1)
-                {
-                    <span id="answer">
-                        @if (answer.IsTrue == true)
-                        {
-                            <input class="answer" name="@Qchar@iteration" type="checkbox" value="true">
-                        }
-                        else
-                        {
-                            <input class="answer" name="@Qchar@iteration" type="checkbox" value="false">
-                        }
-                        <span class="ansText">@answer.Text</span>
+            <li class="item" onclick="chooseCategory(this)" id="@cat.CategoryId">@cat.Name</li>
 
-                    </span>
-
-                    <br />
-                }
-                else
-                {
-                    <span id="answer">
-
-                        @if (answer.IsTrue == true)
-                        {
-                            <input class="answer" name="@Qchar@iteration" type="radio" value="true">
-                        }
-                        else
-                        {
-                            <input class="answer" name="@Qchar@iteration" type="radio" value="false">
-                        }
-                        <span class="ansText">@answer.Text</span>
-
-                    </span>                    
-
-                    <br />
-                }
-            }
-            <br>
-        </div>
-        iteration++;
-    }
-    <input type="hidden" name="questionCount" value="@iteration" />
-    <input id="submitButton" class="btn btn-success" type="button" value="Проверить" onclick="check()"/>
-</form>
-<br />
-<hr />
-<button id="saveResult" class="btn btn-warning resultButton" onclick="saveResult()">Сохранить результат</button>
-<div id="result"></div>
+        }
+    </ul>
+</div>
+<div id="testList">
+      
+</div>
 <script>
+   
 </script>

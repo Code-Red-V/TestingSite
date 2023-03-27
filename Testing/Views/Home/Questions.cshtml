@@ -1,0 +1,67 @@
+﻿@model List<Question>
+@{
+    ViewData["Title"] = "Тест";
+    int iteration = 1;
+    char Qchar = 'Q';
+}
+<link rel="stylesheet" href="~/css/question.css" />
+<link rel="stylesheet" href="~/css/main.css" />
+
+<div id="testItem">
+    <p id="testName"> <b>Тест: @ViewBag.Test.Name </b></p>
+    <p id="testDesc">@ViewBag.Test.Description</p><hr>
+    <p id="testAbout"><span>@ViewBag.Test.Category.Name</span> <span> | </span> <span>Дата создания: @ViewBag.Test.CreationDate.Date.ToString("dd-MM-yyyy")</span></p>
+    <br />
+    <a class="backButton" href="/Home/Index">Вернуться к тестам</a>
+</div>
+
+<div id="questionList">
+    <form id="test" method="post">
+
+        <input type="hidden" name="test" value="@ViewBag.Test.TestId" />
+        @foreach (var question in Model)
+        {
+            <div id="questionItem">
+                <span><b>Вопрос № @iteration</b></span><br>
+                <span id="question">@question.Text</span><br>
+                @foreach (var answer in question.Answers)
+                {
+                    if (question.Answers.Where(i=>i.IsTrue==true).Count()>1)
+                    {
+                        <span id="answer">
+
+                            <input class="answer" name="@Qchar@iteration" type="checkbox" value="@answer.IsTrue.ToString().ToLower()">
+
+                            <span class="ansText">@answer.Text</span>
+
+                        </span>
+
+                        <br />
+                    }
+                    else
+                    {
+                        <span id="answer">
+
+
+                            <input class="answer" name="@Qchar@iteration" type="radio" value="@answer.IsTrue.ToString().ToLower()">
+                            <span class="ansText">@answer.Text</span>
+
+                        </span>
+
+                        <br />
+                    }
+                }
+                <br>
+            </div>
+            iteration++;
+        }
+        <input type="hidden" name="questionCount" value="@iteration" />
+        <div id="centerBox">
+          <input id="submitButton" class="btn btn-success checkButton" type="button" text-align:center;" value="Проверить" onclick="check()" />
+        </div>
+    </form>
+    <br />
+    <hr />
+    <button id="saveResult" class="btn btn-warning resultButton" onclick="saveResult()">Сохранить результат</button>
+    <div id="result"></div>
+</div>

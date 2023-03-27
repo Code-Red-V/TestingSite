@@ -23,3 +23,6 @@ body {
 .resultButton{
     visibility:hidden;
 }
+body{
+    background-color:beige;
+}

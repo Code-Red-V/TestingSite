@@ -15,13 +15,12 @@ public partial class Test
     [StringLength(50)]
     public string? Name { get; set; }
 
-    [StringLength(200)]
+    [StringLength(500)]
     public string? Description { get; set; }
 
     public int? CategoryId { get; set; }
 
-    [Column(TypeName = "datetime")]
-    public DateTime? CreationDate { get; set; }
+    public DateTime CreationDate { get; set; }
 
     [ForeignKey("CategoryId")]
     [InverseProperty("Tests")]

@@ -29,7 +29,7 @@ namespace Testing.Controllers
                 User user = await _context.Users.FirstOrDefaultAsync(u => u.Email == model.Email && u.Password == model.Password);
                 if (user != null)
                 {
-                    await Authenticate(model.Email); // аутентификация
+                    await Authenticate(user); // аутентификация
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -55,7 +55,7 @@ namespace Testing.Controllers
                     _context.Users.Add(new User {UserName = model.UserName, Email = model.Email, Password = model.Password, RoleId = model.RoleId });
                     await _context.SaveChangesAsync();
 
-                    await Authenticate(model.Email); // аутентификация
+                    await Authenticate(user); // аутентификация
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -65,12 +65,14 @@ namespace Testing.Controllers
             return View(model);
         }
 
-        private async Task Authenticate(string userName)
+        private async Task Authenticate(User user)
         {
-            // создаем один claim
+            Role? role = await _context.Roles.FirstOrDefaultAsync(r => r.RoleId == user.RoleId);
+
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
+                new Claim(ClaimTypes.Role,role.Name.ToString().Replace(" ","")),
             };
             // создаем объект ClaimsIdentity
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);

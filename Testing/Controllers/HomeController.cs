@@ -20,9 +20,29 @@ namespace Testing.Controllers
         public IActionResult Index()
         {
             ViewBag.TestId = 1;
-
-            var questions = app.Questions.Include(a=>a.Answers).ToList();
-             return View(questions);
+            ViewBag.Categories = app.Categories.ToList();
+          
+             return View();
+        }
+        public IActionResult Questions(int id)
+        {
+            ViewBag.Test = app.Tests.Include(c=>c.Category).FirstOrDefault(i=>i.TestId==id);
+            ViewBag.Categories = app.Categories.ToList();
+            var questions = app.Questions.Include(a => a.Answers).Where(t=>t.TestId==id).ToList();
+            return View(questions);
+        }
+        public IActionResult ShowTests(int id)
+        {
+            if (id == 0)
+            {
+                ViewBag.Tests = app.Tests.Include(c => c.Category).ToList();
+            }
+            else
+            {
+                ViewBag.Tests = app.Tests.Include(c => c.Category).Where(c => c.CategoryId == id).ToList();
+            }
+         
+            return PartialView("_ShowTests");
         }
         [HttpPost]
         public IActionResult SaveResult(string percent,int testId)

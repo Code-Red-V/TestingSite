@@ -1,0 +1,15 @@
+﻿@{
+    int iteration = 1;
+}
+
+@foreach (var test in ViewBag.Tests as List<Test>)
+{
+    <a asp-controller="Home" asp-action="Questions" asp-route-id="@test.TestId">
+        <div id="testItem">
+            <p id="testName"> <b>Тест № @iteration: @test.Name </b></p>
+            <p id="testDesc">@test.Description</p><hr>
+            <p id="testAbout"><span>@test.Category.Name</span> <span> | </span> <span>Дата создания: @test.CreationDate.Date.ToString("dd-MM-yyyy")</span></p>
+        </div>
+    </a>
+    iteration++;
+}
