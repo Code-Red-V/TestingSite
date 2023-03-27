@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using SmartBreadcrumbs.Extensions;
 using System;
 using Testing.Models;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +30,16 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+//builder.Services.AddBreadcrumbs(GetType().Assembly, options =>
+//{
+//    options.TagName = "nav";
+//    options.TagClasses = "";
+//    options.OlClasses = "breadcrumb";
+//    options.LiClasses = "breadcrumb-item";
+//    options.ActiveLiClasses = "breadcrumb-item active";
+//    options.SeparatorElement = "<li class=\"separator\">/</li>";
+//});
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

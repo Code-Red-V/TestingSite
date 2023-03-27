@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SmartBreadcrumbs.Attributes;
 using System.Diagnostics;
 using Testing.Models;
 using Testing.ViewModels;
@@ -22,6 +23,7 @@ namespace Testing.Controllers
             ViewBag.Categories = app.Categories.ToList();          
              return View();
         }
+        [Breadcrumb("Тест")]
         public IActionResult Questions(int id)
         {
             ViewBag.Test = app.Tests.Include(c=>c.Category).FirstOrDefault(i=>i.TestId==id);
@@ -29,6 +31,8 @@ namespace Testing.Controllers
             var questions = app.Questions.Include(a => a.Answers).Where(t=>t.TestId==id).ToList();
             return View(questions);
         }
+
+        [DefaultBreadcrumb("Home")]
         public IActionResult ShowTests(int id)
         {
             if (id == 0)

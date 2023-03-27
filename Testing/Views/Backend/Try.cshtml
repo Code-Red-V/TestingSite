@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Админка";
+    Layout = "/Views/Shared/_BackendLayout.cshtml";
+}
+<div class="container">
+    <div class="card d-flex w-25 ">
+        <h5 class="card-header">Вопрос</h5>
+        <div class="card-body">
+            <form asp-action="">
+                <div class="form-group">
+                    <label aclass="control-label">Вопрос</label>
+                    <input  class="form-control" />
+                    <span  class="text-danger"></span>
+                </div>
+
+                <div class="form-group w-75">
+                    <label aclass="control-label">Варианты ответа</label>
+                    <input class="form-control" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3 mt-3 ">
+                    <input type="submit" value="Создать" class="btn btn-outline-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

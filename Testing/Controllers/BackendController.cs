@@ -20,6 +20,11 @@ namespace Testing.Controllers
             return View(); /*"/Views/Backend/Index.cshtml"*/
         }
 
-        
+        public IActionResult Try()
+        {
+            return View(); /*"/Views/Backend/Index.cshtml"*/
+        }
+
+
     }
 }

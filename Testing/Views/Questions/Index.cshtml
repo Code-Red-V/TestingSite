@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Testing.Models.Question>
+
+@{
+    ViewBag.Title = "Админка";
+    Layout = "/Views/Shared/_BackendLayout.cshtml";
+}
+
+<h1>Все вопросы</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-outline-success">Добавить вопрос</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Text)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Test)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Text)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Test.Name)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.QuestionId" class="btn btn-outline-secondary">Изменить</a>
+                <a asp-action="Delete" asp-route-id="@item.QuestionId" class="btn btn-outline-danger"><img src="img/delete_img.png" width="24" height="24"></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

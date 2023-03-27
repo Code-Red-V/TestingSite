@@ -45,7 +45,7 @@
             <td>
 @*
                 <a asp-action="Details" asp-route-id="@item.TestId">Details</a> |*@
-
+                    <a asp-action="Details" asp-route-id="@item.TestId" class="btn btn-outline-secondary">Добавить вопросы к тесту</a>
                     <a asp-action="Edit" asp-route-id="@item.TestId" class="btn btn-outline-secondary">Изменить</a>
                     <a asp-action="Delete" asp-route-id="@item.TestId" class="btn btn-outline-danger"><img src="img/delete_img.png" width="24" height="24"></a>
             </td>
