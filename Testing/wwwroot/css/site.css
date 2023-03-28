@@ -26,3 +26,15 @@ body {
 body{
     background-color:beige;
 }
+.userData {
+    text-decoration: none;
+    color: white;
+    border-radius: 10px;
+    padding:5px;
+    margin-right:10px;
+}
+
+    .userData:hover {
+        background-color: beige;
+        color: black;
+    }

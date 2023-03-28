@@ -15,13 +15,12 @@ public partial class Result
     public int? UserId { get; set; }
 
     public int? TestId { get; set; }
-    [StringLength(30)]
-    public string? ResultText { get; set; }
+
+    public bool IsTestPassed{ get; set; }
 
     public int? RightAnswersPercent { get; set; }
 
-    [Column(TypeName = "datetime")]
-    public DateTime? CreationDate { get; set; }
+    public DateTime CreationDate { get; set; }
 
     [ForeignKey("TestId")]
     [InverseProperty("Results")]

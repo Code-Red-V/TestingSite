@@ -62,17 +62,16 @@ namespace Testing.Controllers
                     }
                 }
                 int intPercent = Convert.ToInt32(newPercent);
-                var resultText = "Тест пройден";
 
+                bool isTestPassed = true;
                 if (intPercent < 100)
                 {
-                    resultText = "";
-                    resultText = "Тест не пройден";
+                    isTestPassed = false;
                 }
 
                 Result result = new();
                 result.TestId = testId;
-                result.ResultText = resultText;
+                result.IsTestPassed=isTestPassed;
                 result.UserId = user.UserId;
                 result.CreationDate = DateTime.Now;
                 result.RightAnswersPercent = intPercent;

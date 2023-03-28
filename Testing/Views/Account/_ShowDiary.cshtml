@@ -1,0 +1,66 @@
+﻿@model List<Result>
+
+@{
+    int iteration = 1;
+}
+<link rel="stylesheet" href="~/css/cabinet.css" />
+<h1>Результаты</h1>
+<br />
+<table>
+    <tr>
+        <th>
+            <span>№</span>
+        </th>
+        <th>
+            <span>Категория теста</span>
+        </th>
+        <th>
+            <span>Название теста</span>
+        </th>
+        <th>
+            <span>Результат</span>
+        </th>
+        <th>
+            <span>%</span>
+        </th>
+        <th>
+            <span>Дата</span>
+        </th>
+        <th>
+            <span>Время</span>
+        </th>
+    </tr>
+    @foreach(var result in Model)
+    {
+        <tr>
+            <td style="text-align:right; width:50px;">
+                @iteration
+            </td>
+            <td>
+               @result.Test.Category.Name
+            </td>
+            <td>
+                @result.Test.Name
+            </td>
+            <td>
+                @if (result.IsTestPassed){
+                    <span style="text-decoration:underline 2px solid green">Тест пройден</span>
+                }
+                else
+                {
+                    <span style="text-decoration:underline 2px solid red">Тест не пройден</span>
+                }             
+            </td>
+            <td>
+                @result.RightAnswersPercent<span>%</span>
+            </td>
+            <td style="width:110px">
+                @result.CreationDate.Date.ToString("dd-MM-yyyy")
+            </td>
+            <td>
+                @result.CreationDate.ToString("HH:mm")
+            </td>
+        </tr>
+        iteration++;
+    }
+</table>

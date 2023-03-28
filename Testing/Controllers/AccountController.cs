@@ -16,6 +16,33 @@ namespace Testing.Controllers
             _context = context;
         }
         [HttpGet]
+        public IActionResult PersonalCabinet()
+        {
+            return View();
+        }
+        public IActionResult Profile()
+        {
+            User user = _context.Users.FirstOrDefault(p => p.Email == User.Identity.Name);
+            return PartialView("_ShowProfile", user);
+        }
+        public IActionResult Diary()
+        {
+            User user = _context.Users.FirstOrDefault(p => p.Email == User.Identity.Name);
+            List<Result> result = _context.Results.Include(c=>c.Test).ThenInclude(c=>c.Category).Where(u => u.UserId == user.UserId).ToList();
+            return PartialView("_ShowDiary",result);
+        }
+        [HttpPost]
+        public IActionResult EditUser(string UserName)
+        {
+            User user = _context.Users.FirstOrDefault(p => p.Email == User.Identity.Name);
+            user.UserName = UserName;
+
+            _context.Update(user);
+            _context.SaveChanges();
+
+            return RedirectToAction("PersonalCabinet","Account");
+        }
+        [HttpGet]
         public IActionResult Login()
         {
             return View();

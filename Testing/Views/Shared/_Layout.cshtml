@@ -35,7 +35,7 @@
                 <div class="text-end">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <b>@User.Identity.Name</b>
+                        <a class="userData" asp-action="PersonalCabinet" asp-controller="Account">@User.Identity.Name</a>
                         <a class="btn btn-outline-light me-2" asp-area="" asp-controller="Account" asp-action="Logout">Выйти</a>
                     }
                     else
@@ -58,7 +58,7 @@
 @*
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - Testing - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; @DateTime.Now.Year Тестирование
         </div>
     </footer>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

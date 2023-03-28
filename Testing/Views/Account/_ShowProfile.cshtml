@@ -1,0 +1,20 @@
+﻿@model User
+
+<div id="userPhoto">
+<img src="~/img/user/Person.png" class="userPicture"/>
+</div>
+
+<div id="userInfo">
+    <em>Ваше имя: @Model.UserName</em><br />
+    <em>Email: @Model.Email</em>
+</div>
+<br />
+<div id="editUserInfo">
+    <form asp-controller="Account" asp-action="EditUser" method="post">
+
+        <label asp-for="UserName">Ваше имя</label><br/>
+        <input type="text" asp-for="UserName"/><br />
+        <hr />
+        <input type="submit" class="btn btn-info" value="Изменить данные" />
+    </form>
+</div>
