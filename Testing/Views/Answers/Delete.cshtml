@@ -5,11 +5,10 @@
     Layout = "/Views/Shared/_BackendLayout.cshtml";
 }
 
-<h1>Delete</h1>
+<h1>Удаление варианта ответа</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Вы точно хотите это удалить?</h3>
 <div>
-    <h4>Answer</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -33,8 +32,8 @@
     </dl>
     
     <form asp-action="Delete">
+        <a asp-action="Index" class="btn btn-outline-secondary">Назад к списку</a>
         <input type="hidden" asp-for="AnswerId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Delete" class="btn btn-danger" /> 
     </form>
 </div>

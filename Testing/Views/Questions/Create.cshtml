@@ -4,6 +4,7 @@
     ViewBag.Title = "Админка";
     Layout = "/Views/Shared/_BackendLayout.cshtml";
 }
+
 <h1>Создание вопроса</h1>
 <hr />
 <div class="row">
@@ -27,6 +28,7 @@
 </div>
 
 <div>
+    <a asp-action="RedirectAction" class="btn btn-outline-secondary">Добавить варианты ответов</a>
     <a asp-action="Index" class="btn btn-outline-secondary">Вернутся назад</a>
 </div>
 

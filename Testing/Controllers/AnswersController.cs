@@ -51,9 +51,6 @@ namespace Testing.Controllers
             return View();
         }
 
-        // POST: Answers/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AnswerId,Text,QuestionId,IsTrue")] Answer answer)
@@ -62,7 +59,7 @@ namespace Testing.Controllers
             {
                 _context.Add(answer);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Create));
             }
             ViewData["QuestionId"] = new SelectList(_context.Questions, "QuestionId", "Text");
             return View(answer);

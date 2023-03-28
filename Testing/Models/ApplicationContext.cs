@@ -33,6 +33,7 @@ public partial class ApplicationContext : DbContext
     {
         modelBuilder.Entity<Answer>(entity =>
         {
+            entity.HasKey(e => e.AnswerId).HasName("PK_Theme");
             entity.Property(e => e.Text).IsFixedLength();
 
             entity.HasOne(d => d.Question).WithMany(p => p.Answers)

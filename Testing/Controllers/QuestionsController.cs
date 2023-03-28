@@ -44,10 +44,16 @@ namespace Testing.Controllers
             return View(question);
         }
 
+        public async Task<IActionResult> RedirectAction()
+        {
+            
+            return RedirectToAction("Create", "Answers");
+        }
+
         // GET: Questions/Create
         public IActionResult Create()
         {
-            ViewData["TestId"] = new SelectList(_context.Tests, "TestId", "TestId");
+            ViewData["TestId"] = new SelectList(_context.Tests, "TestId", "Name");
             return View();
         }
 
@@ -62,7 +68,8 @@ namespace Testing.Controllers
             {
                 _context.Add(question);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Create", "Questions");
+
             }
             ViewData["TestId"] = new SelectList(_context.Tests, "TestId", "Name");
             return View(question);

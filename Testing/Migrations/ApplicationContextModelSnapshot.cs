@@ -25,7 +25,10 @@ namespace Testing.Migrations
             modelBuilder.Entity("Testing.Models.Answer", b =>
                 {
                     b.Property<int>("AnswerId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AnswerId"));
 
                     b.Property<bool?>("IsTrue")
                         .HasColumnType("bit");
@@ -38,7 +41,8 @@ namespace Testing.Migrations
                         .HasColumnType("nchar(100)")
                         .IsFixedLength();
 
-                    b.HasKey("AnswerId");
+                    b.HasKey("AnswerId")
+                        .HasName("PK_Theme");
 
                     b.HasIndex("QuestionId");
 
@@ -90,13 +94,16 @@ namespace Testing.Migrations
             modelBuilder.Entity("Testing.Models.Result", b =>
                 {
                     b.Property<int>("ResultId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("CreationDate")
-                        .HasColumnType("datetime");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ResultId"));
 
-                    b.Property<int?>("ResultText")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsTestPassed")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("RightAnswersPercent")
                         .HasColumnType("int");
@@ -137,17 +144,20 @@ namespace Testing.Migrations
             modelBuilder.Entity("Testing.Models.Test", b =>
                 {
                     b.Property<int>("TestId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TestId"));
 
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("CreationDate")
-                        .HasColumnType("datetime");
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Name")
                         .HasMaxLength(50)

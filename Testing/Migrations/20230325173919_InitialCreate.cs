@@ -105,7 +105,8 @@ namespace Testing.Migrations
                 name: "Result",
                 columns: table => new
                 {
-                    ResultId = table.Column<int>(type: "int", nullable: false),
+                    ResultId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: true),
                     TestId = table.Column<int>(type: "int", nullable: true),
                     ResultText = table.Column<int>(type: "int", nullable: true),
@@ -133,7 +134,8 @@ namespace Testing.Migrations
                 name: "Answer",
                 columns: table => new
                 {
-                    AnswerId = table.Column<int>(type: "int", nullable: false),
+                    AnswerId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Text = table.Column<string>(type: "nchar(100)", fixedLength: true, maxLength: 100, nullable: true),
                     QuestionId = table.Column<int>(type: "int", nullable: true),
                     IsTrue = table.Column<bool>(type: "bit", nullable: true)
