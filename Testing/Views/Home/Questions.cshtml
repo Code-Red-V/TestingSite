@@ -1,10 +1,13 @@
 ﻿@model List<Question>
 @{
     ViewData["Title"] = "Тест";
-    int iteration = 1;
+    int sequenceNum = 1;
+    int iIteration = 1;
     int jIteration = 0;
     char Qchar = 'Q';
+    char blockChar = 'B';
 }
+
 <link rel="stylesheet" href="~/css/question.css" />
 <link rel="stylesheet" href="~/css/main.css" />
 
@@ -22,18 +25,25 @@
         <input type="hidden" name="test" value="@ViewBag.Test.TestId" />
         @foreach (var question in Model)
         {
-            <div id="questionItem">
-                <span><b>Вопрос № @iteration</b></span><br>
+            <div id="questionItem" class="itemBackground">
+                <span><b>Вопрос № @iIteration</b></span><br>
                 <span id="question">@question.Text</span><br>
                 @foreach (var answer in question.Answers)
                 {
                     if (question.Answers.Where(i=>i.IsTrue==true).Count()>1)
                     {
                         <span id="answer">
+                        @*    @if (answer.IsTrue == true)
+                            {
+                                <i class="bi bi-check2 icon"></i>
+                            }
+                            else
+                            {
+                                <i class="bi bi-x-lg icon"></i>
+                            }*@
+                            <input id="@blockChar@sequenceNum" class="answer" name="@Qchar@iIteration" type="checkbox" value="@answer.IsTrue.ToString().ToLower()">
 
-                            <input class="answer" name="@Qchar@iteration" type="checkbox" value="@answer.IsTrue.ToString().ToLower()">
-
-                            <span onclick="getChecked(@iteration,@jIteration)" class="ansText">@answer.Text</span>
+                            <span onclick="getChecked(@iIteration,@jIteration)" class="ansText">@answer.Text</span>
 
                         </span>
 
@@ -41,24 +51,31 @@
                     }
                     else
                     {
-                        <span id="answer" onclick="getChecked(@iteration,@jIteration)">
-
-
-                            <input class="answer" name="@Qchar@iteration" type="radio" value="@answer.IsTrue.ToString().ToLower()">
-                            <span class="ansText">@answer.Text</span>
+                        <span id="answer">
+                          @*  @if (answer.IsTrue==true)
+                            {
+                                <i class="bi bi-check2 icon"></i>
+                            }
+                            else
+                            {
+                                <i class="bi bi-x-lg icon"></i>
+                            }                   *@
+                        <input id="@blockChar@sequenceNum" class="answer" name="@Qchar@iIteration" type="radio" value="@answer.IsTrue.ToString().ToLower()">
+                            <span onclick="getChecked(@iIteration,@jIteration)" class="ansText">@answer.Text</span>
 
                         </span>
 
                         <br />
                     }
                     jIteration++;
+                    sequenceNum++;
                 }
                 <br>
             </div>
-            iteration++;
+            iIteration++;
             jIteration = 0;
         }
-        <input type="hidden" name="questionCount" value="@iteration" />
+        <input type="hidden" name="questionCount" value="@iIteration" />
         <div id="centerBox">
           <input id="submitButton" class="btn btn-success checkButton" type="button" value="Проверить" onclick="check()" />
         </div>

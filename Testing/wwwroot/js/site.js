@@ -12,7 +12,7 @@
         });
 }
 function check() {
-    let radioChecked = [], checkboxesChecked = [], rightAnswers = 0, rightAnswersPercent = 0, rightCheckBoxesChecked = 0, checkBoxCheckedResult, trueCheckBoxes = 0;
+    let radioChecked = [], checkboxesChecked = [], rightAnswers = 0, rightAnswersPercent = 0, rightCheckBoxesChecked = 0, checkBoxCheckedResult, trueCheckBoxes = 0, checkBox;
 
     var allInputs = document.getElementsByClassName('answer');
     var questionCount = parseInt(document.querySelector('input[name="questionCount"]').value) - 1;
@@ -25,25 +25,89 @@ function check() {
         }
     }
     for (let i = 0; i < radioChecked.length; i++) {
-        if (radioChecked[i].value == 'true') {
+        var resDiv = document.createElement('div');
+        resDiv.setAttribute("id", "resultIcon");
+
+        var parElem = radioChecked[i].parentElement;
+        var questionItem = parElem.parentElement;
+
+        if (radioChecked[i].value == 'true') {              
+
+            parElem.classList.add('rightAnswer');
+            questionItem.classList.add('rightAnswerBackground');
+
+            resDiv.classList.add('trueIcon');
+            questionItem.appendChild(resDiv);       
+
             rightAnswers++;
+        } else if (radioChecked[i].value == 'false') {
+            parElem.classList.add('wrongAnswer');
+            questionItem.classList.add('wrongAnswerBackground');
+
+            resDiv.classList.add('falseIcon');
+            questionItem.appendChild(resDiv);
         }
     }
 
     for (let i = 0; i < questionCount; i++) {
         var name = 'Q' + (i + 1);
         var inputs = document.getElementsByName(`${name}`);
+        
         for (let j = 0; j < inputs.length; j++) {
+            var parElem = inputs[j].parentElement;
+
             if (inputs[j].type == 'checkbox' && inputs[j].value == 'true') {
+                checkBox = inputs[j].parentElement;
                 trueCheckBoxes++;
             }
-            if (inputs[j].type == 'checkbox' && inputs[j].checked && inputs[j].value == 'true') {
-                rightCheckBoxesChecked++;
+        }
+
+        var oneMark = 1 / trueCheckBoxes;
+
+        for (let j = 0; j < inputs.length; j++) {
+            var parElem = inputs[j].parentElement;
+
+            if (inputs[j].type == 'checkbox' && inputs[j].checked && inputs[j].value == 'true') {               
+                parElem.classList.add('rightAnswer');
+                rightCheckBoxesChecked += oneMark;
+            }
+            if (inputs[j].type == 'checkbox' && inputs[j].checked && inputs[j].value == 'false') {
+                parElem.classList.add('wrongAnswer');
+                    rightCheckBoxesChecked -= oneMark;
             }
         }
+        if (rightCheckBoxesChecked < 0) { rightCheckBoxesChecked = 0; }
         if (isNaN(checkBoxCheckedResult)) checkBoxCheckedResult = 0;
 
-        checkBoxCheckedResult += rightCheckBoxesChecked / trueCheckBoxes;       
+        checkBoxCheckedResult += rightCheckBoxesChecked;   
+
+        if (typeof checkBox !== 'undefined') {
+            let questionItem = checkBox.parentElement;
+
+            var resDiv = document.createElement('div');
+            resDiv.setAttribute("id", "resultIcon");
+
+            if (rightCheckBoxesChecked == 1) {
+                questionItem.classList.add('rightAnswerBackground');
+              
+                resDiv.classList.add('trueIcon');
+                questionItem.appendChild(resDiv);
+            }
+            if (rightCheckBoxesChecked == 0) {
+                questionItem.classList.add('wrongAnswerBackground');
+
+                resDiv.classList.add('falseIcon');
+                questionItem.appendChild(resDiv);
+            }
+            if (rightCheckBoxesChecked > 0 & rightCheckBoxesChecked < 1) {
+                questionItem.classList.add('warningBackground');  
+
+                resDiv.classList.add('warningIcon');
+                questionItem.appendChild(resDiv);
+            }
+        }
+   
+            
         rightCheckBoxesChecked = 0;
         trueCheckBoxes = 0;
     }
@@ -55,7 +119,7 @@ function check() {
 
     var result = document.getElementById('result');
     result.innerHTML = "";
-    result.innerHTML = "<p></p>Ваш результат:<br> Баллы: <b>" + rightAnswers + "</b> из <b>" + questionCount + "</b><br> Тест пройден на ";
+    result.innerHTML = "<p></p>Ваш результат:<br> Баллы: <b>" + rightAnswers.toFixed(2) + "</b> из <b>" + questionCount + "</b><br> Тест пройден на ";
 
     var descB=document.createElement('b');
     descB.setAttribute("id","percent");
@@ -68,6 +132,14 @@ function check() {
 
      var resultButton = document.getElementById('saveResult');
     resultButton.classList.remove('resultButton');
+
+    
+    //var icons = document.getElementsByClassName('icon');
+
+    //for (var i = 0; i < icons.length; i++) {
+    //    icons[i].classList.remove('icon');
+    //    icons[i].classList.add('visIcon');
+    //}
 }
 window.onload = function () {
     $('#testList').load("/Home/ShowTests");

@@ -33,7 +33,7 @@
     @foreach(var result in Model)
     {
         <tr>
-            <td style="text-align:right; width:50px;">
+            <td style="text-align:center; width:50px;">
                 @iteration
             </td>
             <td>
@@ -42,7 +42,7 @@
             <td>
                 @result.Test.Name
             </td>
-            <td>
+            <td style="width:170px">
                 @if (result.IsTestPassed){
                     <span style="text-decoration:underline 2px solid green">Тест пройден</span>
                 }

@@ -12,7 +12,7 @@ public partial class User
     [Key]
     public int UserId { get; set; }
 
-    [StringLength(100)]
+    [StringLength(70)]
     public string? UserName { get; set; }
 
     [StringLength(100)]

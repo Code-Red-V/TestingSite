@@ -1,15 +1,18 @@
-﻿#questionItem {
-    background-color: white;
+﻿#questionItem {   
     border-radius: 10px;
     padding: 15px 30px 5px 30px;
     margin-bottom: 15px;
+}
+.itemBackground {
+    background-color: white;
+    position:relative;
 }
 .backButton {
     background-color: grey;
     border: none;
     border-radius: 5px;
     padding: 10px;
-    color:white;
+    color: white;
 }
 .backButton:hover{
     background-color:darkgray;
@@ -25,6 +28,7 @@
 }
 #answer{
     border-radius:5px;
+    padding:0px 5px 0px 5px;
 }
 #answer:hover{
     color:grey;
@@ -33,4 +37,45 @@
 }
 input:hover {
     cursor: pointer;
+}
+.rightAnswer {
+    background-color: #7bff67;
+}
+.rightAnswerBackground{
+    background-color:#b5ff9b;
+    border:1px solid green;
+}
+.wrongAnswer {
+    background-color:#ff7070;
+}
+.wrongAnswerBackground {
+    background-color:#e09494;
+    border: 1px solid red;
+}
+#resultIcon {
+    position: absolute;
+    left: 95%;
+    top: 10%;
+}
+.trueIcon {
+    background-image: url(/img/FuncIcon/true.png);
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+}
+.falseIcon {
+    background-image: url(/img/FuncIcon/false.png);
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+}
+.warningBackground {
+    background-color: #fff287;
+    border:1px solid #ffb400;
+}
+.warningIcon {
+    background-image: url(/img/FuncIcon/warning.png);
+    background-size: cover;
+    width: 30px;
+    height: 30px;
 }
