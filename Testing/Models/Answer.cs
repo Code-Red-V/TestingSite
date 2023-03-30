@@ -17,7 +17,7 @@ public partial class Answer
 
     public int? QuestionId { get; set; }
 
-    public bool? IsTrue { get; set; }
+    public bool IsTrue { get; set; }
 
     [ForeignKey("QuestionId")]
     [InverseProperty("Answers")]

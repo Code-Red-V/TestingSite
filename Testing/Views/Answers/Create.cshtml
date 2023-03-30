@@ -24,13 +24,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="IsTrue" class="control-label"></label>
-                <input asp-for="IsTrue" class="form-control" />
+                <input asp-for="IsTrue" type="checkbox" value="true" />
                 <span asp-validation-for="IsTrue" class="text-danger"></span>
-               
-@*                <input checked="@(ViewBag.IsTrue = true ? "checked" : null)" asp-for="IsTrue" class="form-control" type="checkbox" value="true" id="check">
-                <input asp-for="IsTrue" type="hidden" value="false" name="Remember" />
-                <label asp-for="IsTrue" class="control-label">Правильный ответ</label>
-                <span asp-validation-for="IsTrue" class="text-danger"></span>*@
             </div>
             <div class="form-group mb-3 mt-3">
                 <input type="submit" value="Create" class="btn btn-outline-primary" />

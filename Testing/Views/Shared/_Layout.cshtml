@@ -24,7 +24,7 @@
 
                     @if (User.Identity.IsAuthenticated)
                     {
-                        @if (User.FindFirst(ClaimTypes.Role).Value == "User")
+                        @if (User.FindFirst(ClaimTypes.Role).Value == "Admin")
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="Backend" asp-action="Index">Admin Panel</a>
