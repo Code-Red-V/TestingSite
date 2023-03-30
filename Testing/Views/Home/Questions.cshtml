@@ -33,14 +33,6 @@
                     if (question.Answers.Where(i=>i.IsTrue==true).Count()>1)
                     {
                         <span id="answer">
-                        @*    @if (answer.IsTrue == true)
-                            {
-                                <i class="bi bi-check2 icon"></i>
-                            }
-                            else
-                            {
-                                <i class="bi bi-x-lg icon"></i>
-                            }*@
                             <input id="@blockChar@sequenceNum" class="answer" name="@Qchar@iIteration" type="checkbox" value="@answer.IsTrue.ToString().ToLower()">
 
                             <span onclick="getChecked(@iIteration,@jIteration)" class="ansText">@answer.Text</span>
@@ -51,15 +43,7 @@
                     }
                     else
                     {
-                        <span id="answer">
-                          @*  @if (answer.IsTrue==true)
-                            {
-                                <i class="bi bi-check2 icon"></i>
-                            }
-                            else
-                            {
-                                <i class="bi bi-x-lg icon"></i>
-                            }                   *@
+                        <span id="answer">   
                         <input id="@blockChar@sequenceNum" class="answer" name="@Qchar@iIteration" type="radio" value="@answer.IsTrue.ToString().ToLower()">
                             <span onclick="getChecked(@iIteration,@jIteration)" class="ansText">@answer.Text</span>
 

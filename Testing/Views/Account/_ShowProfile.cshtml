@@ -1,8 +1,8 @@
 ﻿@model User
 
-<div id="userPhoto">
+@*<div id="userPhoto">
 <img src="~/img/user/Person.png" class="userPicture"/>
-</div>
+</div>*@
 
 <div id="userInfo">
     <em>Ваше имя: @Model.UserName</em><br />
@@ -13,8 +13,7 @@
     <form asp-controller="Account" asp-action="EditUser" method="post">
 
         <label asp-for="UserName">Ваше имя</label><br/>
-        <input type="text" asp-for="UserName"/><br />
-        <hr />
+        <input type="text" asp-for="UserName"/><br /><br />
         <input type="submit" class="btn btn-info" value="Изменить данные" />
     </form>
 </div>

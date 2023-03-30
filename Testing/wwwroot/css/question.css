@@ -39,14 +39,14 @@ input:hover {
     cursor: pointer;
 }
 .rightAnswer {
-    background-color: #7bff67;
+    background-color: #7aff5473;
 }
 .rightAnswerBackground{
   /*  background-color:#b5ff9b;*/
     border:1px solid green;
 }
 .wrongAnswer {
-    background-color:#ff7070;
+    background-color:#ff000046;
 }
 .wrongAnswerBackground {
    /* background-color:#e09494;*/

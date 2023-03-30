@@ -1,13 +1,13 @@
-﻿@media(max-width:1100px){
+﻿/*@media(max-width:1100px){
     #userPhoto{
         display:none;
     }
-}
+}*/
 #userData {
+    position:relative;
     background-color: white;
     border-radius: 10px;
     padding: 30px;
-    margin-bottom: 20px;
     width: 79%;
     min-height:300px;
     float: right;
@@ -25,28 +25,20 @@ td {
     border: 1px solid grey;
     padding: 10px;
 }
-#userPhoto{
+/*#userPhoto{
     float:left;
     width:40%;
-    text-align:center;
-}
-#userInfo{
-    min-width:100px;
-    width:60%;
-    float:right;
+}*/
+#userInfo{   
+
     background-color:beige;
     border-radius:10px;
     padding:20px;
 }
 #editUserInfo {
-    width:50%;
-    float:right;
-    position:relative;
-    top:30px;
-    right:5%;
     text-align:center;
 }
-.userPicture{
-    width:250px;
-    height:210px;
-}
+/*.userPicture{
+    width:150px;
+    height:130px;
+}*/
