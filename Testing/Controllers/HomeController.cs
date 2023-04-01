@@ -20,10 +20,10 @@ namespace Testing.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.Categories = app.Categories.ToList();          
+            ViewBag.Categories = app.Categories.ToList();
              return View();
         }
-        [Breadcrumb("Тест")]
+
         public IActionResult Questions(int id)
         {
             ViewBag.Test = app.Tests.Include(c=>c.Category).FirstOrDefault(i=>i.TestId==id);

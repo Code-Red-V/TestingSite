@@ -1,0 +1,28 @@
+﻿@model List<Category>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Название
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(ViewBag => item.Name)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.CategoryId" class="btn btn-outline-secondary">Изменить</a>
+                        <a asp-action="Delete" asp-route-id="@item.CategoryId" class="btn btn-outline-danger"><img src="img/delete_img.png" width="24" height="24"></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+

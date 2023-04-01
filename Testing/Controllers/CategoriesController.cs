@@ -19,30 +19,40 @@ namespace Testing.Controllers
         }
 
         // GET: Categories
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(Category cat)
         {
-              return _context.Categories != null ? 
-                          View(await _context.Categories.ToListAsync()) :
-                          Problem("Entity set 'ApplicationContext.Categories'  is null.");
+            //ViewData["TestId"] = new SelectList(_context.Tests, "CatId", "Name");
+            //if (id == null)
+            //{
+            //    //return _context.Categories != null ?
+            //    //          View(await _context.Categories.ToListAsync()) :
+            //    //          Problem("Entity set 'ApplicationContext.Categories'  is null.");
+            //}
+            //else
+            //{
+            //    return PartialView(await _context.Categories.FindAsync(id));
+            //}
+            ViewBag.Categories = _context.Categories.ToList();
+            return _context.Categories != null ?
+                View(await _context.Categories.ToListAsync()) :
+                Problem("Entity set 'ApplicationContext.Categories'  is null.");
         }
 
-        //// GET: Categories/Details/5
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null || _context.Categories == null)
-        //    {
-        //        return NotFound();
-        //    }
+        public async Task<IActionResult> Filter(Category cat,int id)
+        {
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name");
+            if (id == null)
+            {
 
-        //    var category = await _context.Categories
-        //        .FirstOrDefaultAsync(m => m.CategoryId == id);
-        //    if (category == null)
-        //    {
-        //        return NotFound();
-        //    }
+                return View();
+            }
+            else
+            {
+                return PartialView(await _context.Categories.FindAsync(id));
+            }
+            
+        }
 
-        //    return View(category);
-        //}
 
         // GET: Categories/Create
         public IActionResult Create()

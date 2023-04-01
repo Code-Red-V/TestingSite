@@ -37,14 +37,7 @@
 <div>
     <a asp-action="Index" class="btn btn-outline-secondary">Вернуться к списку</a>
 </div>
-@*<script>
-    $(function(){
-        $(".check").change(function(){
-            $(this).closest('form').submit();
-        })
-    })
-</script>*@
-@section Scripts {
+
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
 }
