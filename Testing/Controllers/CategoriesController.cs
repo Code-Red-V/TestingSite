@@ -19,39 +19,29 @@ namespace Testing.Controllers
         }
 
         // GET: Categories
-        public async Task<IActionResult> Index(Category cat)
+        public async Task<IActionResult> Index()
         {
-            //ViewData["TestId"] = new SelectList(_context.Tests, "CatId", "Name");
-            //if (id == null)
-            //{
-            //    //return _context.Categories != null ?
-            //    //          View(await _context.Categories.ToListAsync()) :
-            //    //          Problem("Entity set 'ApplicationContext.Categories'  is null.");
-            //}
-            //else
-            //{
-            //    return PartialView(await _context.Categories.FindAsync(id));
-            //}
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name");
             ViewBag.Categories = _context.Categories.ToList();
             return _context.Categories != null ?
                 View(await _context.Categories.ToListAsync()) :
                 Problem("Entity set 'ApplicationContext.Categories'  is null.");
         }
 
-        public async Task<IActionResult> Filter(Category cat,int id)
+        public async Task<IActionResult> Filter(int id)
         {
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "CategoryId", "Name");
-            if (id == null)
-            {
+            ViewBag.Categories = _context.Categories.Where(c => c.CategoryId == id).ToList();
+            var filter = await _context.Categories.FindAsync(id);
 
-                return View();
-            }
-            else
-            {
-                return PartialView(await _context.Categories.FindAsync(id));
-            }
-            
+            return View(filter);
         }
+
+        //public async Task<IActionResult> Filter(Category cat, int id)
+        //{
+
+        //    return PartialView();
+
+        //}
 
 
         // GET: Categories/Create
