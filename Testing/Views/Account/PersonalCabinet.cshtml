@@ -10,20 +10,16 @@
         <li class="item" onclick="diary()">Дневник</li>
     </ul>
 </div>
+
 <div id="userData">
 
 </div>
+
 
 @section Scripts{
     <script>
         window.onload = function () {
             $('#userData').load("/Account/Profile");
-        }
-        function profile() {
-            $('#userData').load("/Account/Profile");
-        }
-        function diary() {
-            $('#userData').load("/Account/Diary");
-        }
+        }       
     </script>
 }

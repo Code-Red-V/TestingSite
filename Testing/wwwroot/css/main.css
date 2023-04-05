@@ -24,6 +24,7 @@
 #testList {
     width: 79%;
     float: right;
+    position:relative;
 }
 #testAbout {
     font-style: italic;
@@ -51,6 +52,27 @@ ul{
 a {
     text-decoration: none;
     color: black;
+}
+.buttons{
+    position:relative;
+}
+.aligned {
+  position:absolute;
+  top:10%;
+}
+.pagination {
+    height:65px;
+    border-radius: 10px;
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 5px;
+}
+.hint {
+    position: absolute;
+    right:20px;
+    background-color: gainsboro;
+    border-radius: 5px;
+    padding: 10px;
 }
 /*.icon{
    display:none;

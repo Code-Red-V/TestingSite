@@ -16,3 +16,12 @@
 <div id="testList">
       
 </div>
+
+
+@section Scripts{
+    <script>
+        window.onload = function () {
+            $('#testList').load("/Home/ShowTests");
+        }
+    </script>
+}

@@ -28,65 +28,37 @@ namespace Testing.Controllers
         {
             ViewBag.Test = app.Tests.Include(c=>c.Category).FirstOrDefault(i=>i.TestId==id);
             ViewBag.Categories = app.Categories.ToList();
+
             var questions = app.Questions.Include(a => a.Answers).Where(t=>t.TestId==id).ToList();
             return View(questions);
         }
 
         [DefaultBreadcrumb("Home")]
-        public IActionResult ShowTests(int id)
+        public IActionResult ShowTests(int id,int page=1)
         {
+            List<Test> tests;
             if (id == 0)
             {
-                ViewBag.Tests = app.Tests.Include(c => c.Category).ToList();
+                tests = app.Tests.Include(c => c.Category).ToList();
             }
             else
             {
-                ViewBag.Tests = app.Tests.Include(c => c.Category).Where(c => c.CategoryId == id).ToList();
+               tests= app.Tests.Include(c => c.Category).Where(c => c.CategoryId == id).ToList();
             }
-         
-            return PartialView("_ShowTests");
-        }
-        [HttpPost]
-        public IActionResult SaveResult(string percent,int testId)
-        {
-            if (User.Identity.IsAuthenticated)
+            int pageSize = 5;
+           
+            int count = tests.Count();
+            var items = tests.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
+            IndexViewModel viewModel = new IndexViewModel
             {
-                User user = app.Users.FirstOrDefault(e => e.Email == User.Identity.Name);
+                PageViewModel = pageViewModel,
+                Tests = items
+            };
 
-                string newPercent = "";
-                for (int i = 0; i < percent.Length; i++)
-                {
-                    if (percent[i] != '%')
-                    {
-                        newPercent += percent[i];
-                    }
-                }
-                int intPercent = Convert.ToInt32(newPercent);
-
-                bool isTestPassed = true;
-                if (intPercent < 100)
-                {
-                    isTestPassed = false;
-                }
-
-                Result result = new();
-                result.TestId = testId;
-                result.IsTestPassed=isTestPassed;
-                result.UserId = user.UserId;
-                result.CreationDate = DateTime.Now;
-                result.RightAnswersPercent = intPercent;
-
-                app.Results.Add(result);
-                app.SaveChanges();
-
-                return Json(new { isValid = true, message="Данные добавлены в дневник" });
-            }
-            else
-            {
-                return Json(new { isValid = false, message="Необходимо авторизоваться" });
-            }
-
-        }
+            return PartialView("_ShowTests",viewModel);
+        }      
         
     }
 }

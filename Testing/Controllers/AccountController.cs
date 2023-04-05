@@ -5,6 +5,7 @@ using System.Security.Claims;
 using Testing.Models;
 using Testing.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using Elfie.Serialization;
 
 namespace Testing.Controllers
 {
@@ -25,11 +26,25 @@ namespace Testing.Controllers
             User user = _context.Users.FirstOrDefault(p => p.Email == User.Identity.Name);
             return PartialView("_ShowProfile", user);
         }
-        public IActionResult Diary()
+        public IActionResult Diary(int page = 1)
         {
+
+            int pageSize = 5;
+           
             User user = _context.Users.FirstOrDefault(p => p.Email == User.Identity.Name);
             List<Result> result = _context.Results.Include(c=>c.Test).ThenInclude(c=>c.Category).Where(u => u.UserId == user.UserId).ToList();
-            return PartialView("_ShowDiary",result);
+
+            int count = result.Count();
+            var items = result.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
+            IndexViewModel viewModel = new IndexViewModel
+            {
+                PageViewModel = pageViewModel,
+                Results = items
+            };
+
+            return PartialView("_ShowDiary", viewModel);
         }
         [HttpPost]
         public IActionResult EditUser(string UserName)
