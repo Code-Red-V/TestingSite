@@ -10,9 +10,11 @@
         <li class="item" onclick="diary()">Дневник</li>
     </ul>
 </div>
+
 <div id="userData">
 
 </div>
+
 
 @section Scripts{
     <script>
@@ -24,6 +26,9 @@
         }
         function diary() {
             $('#userData').load("/Account/Diary");
+        }
+        function pagination(value) {
+            $('#userData').load("/Account/Diary/?page=" + value);
         }
     </script>
 }

@@ -1,11 +1,26 @@
-﻿@model List<Result>
-
+﻿@using Testing.ViewModels;
+@model IndexViewModel
 @{
     int iteration = 1;
 }
 <link rel="stylesheet" href="~/css/cabinet.css" />
 <h1>Результаты</h1>
 <br />
+
+<div class="pagination">
+    @if (Model.PageViewModel.HasPreviousPage)
+    {
+        <button onclick="pagination(@(Model.PageViewModel.PageNumber - 1))" class="btn btn-outline-dark pagButt">
+            Назад
+        </button>
+    }
+    @if (Model.PageViewModel.HasNextPage)
+    {
+        <button onclick="pagination(@(Model.PageViewModel.PageNumber + 1))" class="btn btn-outline-dark pagButt">
+            Вперед
+        </button>
+    }
+</div>
 <table>
     <tr>
         <th>
@@ -30,11 +45,11 @@
             <span>Время</span>
         </th>
     </tr>
-    @foreach(var result in Model)
+    @foreach(var result in Model.Results)
     {
         <tr>
-            <td style="text-align:center; width:50px;">
-                @iteration
+            <td id="Id" style="text-align:center; width:50px;">
+             @IndexViewModel.GetNum(iteration,Model.PageViewModel.PageNumber)
             </td>
             <td>
                @result.Test.Category.Name
@@ -64,3 +79,8 @@
         iteration++;
     }
 </table>
+@section Scripts{<script>
+ 
+
+</script>}
+

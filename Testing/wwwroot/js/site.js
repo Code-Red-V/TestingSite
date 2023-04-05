@@ -1,15 +1,43 @@
 ﻿function saveResult() {
-    var result = document.getElementById('percent').innerHTML;
-    var test = document.querySelector("input[name='test']").value;
-
-    $.post('/Home/SaveResult', { percent: "" + result + "", testId: "" + test + "" },
-        function (res) {
+    var percent =document.getElementById('percent').innerHTML;
+    var testId =  parseInt(document.querySelector("input[name='test']").value);
+  
+    var newPercent ='';
+    for (let i = 0; i < percent.length; i++)
+    {
+        if (percent[i] != '%')
+        {
+            newPercent += percent[i];
+        }
+    }
+    newPercent = parseInt(newPercent);
+    var value = { 'percentPar': newPercent, 'testPar': testId }
+    $.ajax({
+        type: "Post",
+        url: "/api/Values/Process",
+        data: JSON.stringify(value),  
+        dataType: "json",
+        contentType: "application/json",
+        success: function (res) {
             if (res.isValid) {
                 alert(res.message);
             } else {
                 alert(res.message);
             }
-        });
+        }
+    });
+    //$.post('/api/Values/Process',
+    //    {
+    //        percentPar: JSON.stringify(newPercent),
+    //        testPar: JSON.stringify(testId),
+    //    },
+    //    function (res) {
+    //        if (res.isValid) {
+    //            alert(res.message);
+    //        } else {
+    //            alert(res.message);
+    //        }
+    //    });       
 }
 function check() {
     var rightAnswers = 0,
@@ -153,3 +181,21 @@ function getChecked(question, answer) {
         inputs[answer].checked = true;
     }
 }
+
+
+//$('#pagination-container').pagination({
+//    dataSource: [1, 2, 3, 4, 5, 6, 7, 195],
+//    callback: function (data, pagination) {
+//        var html = simpleTemplating(data);
+//        $('#data-container').html(html);
+//    }
+//})
+
+//function simpleTemplating(data) {
+//    var html = '<ul>';
+//    $.each(data, function (index, item) {
+//        html += '<li>' + item + '</li>';
+//    });
+//    html += '</ul>';
+//    return html;
+//}

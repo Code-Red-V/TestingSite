@@ -18,6 +18,7 @@ th {
     padding:10px;
 }
 table {
+
     width:100%;
     border-top: 1px solid grey;
 }
@@ -42,3 +43,7 @@ td {
     width:150px;
     height:130px;
 }*/
+.pagButt {
+   width:100px;
+   margin:0px 5px 15px 0px;
+}
