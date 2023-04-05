@@ -34,18 +34,30 @@ namespace Testing.Controllers
         }
 
         [DefaultBreadcrumb("Home")]
-        public IActionResult ShowTests(int id)
+        public IActionResult ShowTests(int id,int page=1)
         {
+            List<Test> tests;
             if (id == 0)
             {
-                ViewBag.Tests = app.Tests.Include(c => c.Category).ToList();
+                tests = app.Tests.Include(c => c.Category).ToList();
             }
             else
             {
-                ViewBag.Tests = app.Tests.Include(c => c.Category).Where(c => c.CategoryId == id).ToList();
+               tests= app.Tests.Include(c => c.Category).Where(c => c.CategoryId == id).ToList();
             }
-         
-            return PartialView("_ShowTests");
+            int pageSize = 5;
+           
+            int count = tests.Count();
+            var items = tests.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
+            IndexViewModel viewModel = new IndexViewModel
+            {
+                PageViewModel = pageViewModel,
+                Tests = items
+            };
+
+            return PartialView("_ShowTests",viewModel);
         }      
         
     }

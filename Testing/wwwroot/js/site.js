@@ -160,9 +160,14 @@ function decoratedNotice(child, value) {
     }
 }
 
-
-window.onload = function () {
-    $('#testList').load("/Home/ShowTests");
+function profile() {
+    $('#userData').load("/Account/Profile");
+}
+function diary() {
+    $('#userData').load("/Account/Diary");
+}
+function pagination(updateElId,pageNumber,url) {
+    $(updateElId).load(url + pageNumber);
 }
 
 function chooseCategory(el) {

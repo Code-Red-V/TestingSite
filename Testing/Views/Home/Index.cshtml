@@ -16,5 +16,12 @@
 <div id="testList">
       
 </div>
-<div id="data-container"></div>
-<div id="pagination-container"></div>
+
+
+@section Scripts{
+    <script>
+        window.onload = function () {
+            $('#testList').load("/Home/ShowTests");
+        }
+    </script>
+}

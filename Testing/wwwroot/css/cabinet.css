@@ -1,7 +1,9 @@
-﻿/*@media(max-width:1100px){
-    #userPhoto{
-        display:none;
-    }
+﻿/*.pagButt {
+    position:absolute;
+    right:30px;
+    background-color: gainsboro;
+    border-radius:5px;
+    padding:10px;
 }*/
 #userData {
     position:relative;
@@ -26,10 +28,6 @@ td {
     border: 1px solid grey;
     padding: 10px;
 }
-/*#userPhoto{
-    float:left;
-    width:40%;
-}*/
 #userInfo{   
 
     background-color:beige;
@@ -38,12 +36,4 @@ td {
 }
 #editUserInfo {
     text-align:center;
-}
-/*.userPicture{
-    width:150px;
-    height:130px;
-}*/
-.pagButt {
-   width:100px;
-   margin:0px 5px 15px 0px;
 }

@@ -1,15 +1,36 @@
-﻿@{
+﻿@model IndexViewModel
+@{
     int iteration = 1;
 }
 
-@foreach (var test in ViewBag.Tests as List<Test>)
+@foreach (var test in Model.Tests)
 {
     <a asp-controller="Home" asp-action="Questions" asp-route-id="@test.TestId">
         <div id="testItem">
-            <p id="testName"> <b>Тест № @iteration: @test.Name </b></p>
+            <p id="testName"> <b>Тест № @IndexViewModel.GetNum(iteration,Model.PageViewModel.PageNumber): @test.Name </b></p>
             <p id="testDesc">@test.Description</p><hr>
             <p id="testAbout"><span>@test.Category.Name</span> <span> | </span> <span>Дата создания: @test.CreationDate.Date.ToString("dd-MM-yyyy")</span></p>
         </div>
     </a>
     iteration++;
 }
+
+<div class="pagination">
+    <div class="buttons">
+        @if (Model.PageViewModel.HasPreviousPage)
+        {
+            <button onclick="pagination('#testList',@(Model.PageViewModel.PageNumber - 1),'/Home/ShowTests/?page=')" class="btn btn-outline-dark pagButt">
+                Назад
+            </button>
+        }
+        @if (Model.PageViewModel.HasNextPage)
+        {
+            <button onclick="pagination('#testList',@(Model.PageViewModel.PageNumber + 1),'/Home/ShowTests/?page=')" class="btn btn-outline-dark pagButt">
+                Вперед
+            </button>
+        }
+    </div>
+    <div class="hint">
+        @Model.PageViewModel.PageNumber/@Model.PageViewModel.TotalPages стр.
+    </div>
+</div>

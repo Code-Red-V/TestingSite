@@ -29,7 +29,7 @@ namespace Testing.Controllers
         public IActionResult Diary(int page = 1)
         {
 
-            int pageSize = 10;
+            int pageSize = 5;
            
             User user = _context.Users.FirstOrDefault(p => p.Email == User.Identity.Name);
             List<Result> result = _context.Results.Include(c=>c.Test).ThenInclude(c=>c.Category).Where(u => u.UserId == user.UserId).ToList();
