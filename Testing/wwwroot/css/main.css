@@ -20,6 +20,7 @@
 }
 #testDesc{
     font-size:smaller;
+    overflow-wrap:break-word;
 }
 #testList {
     width: 79%;
